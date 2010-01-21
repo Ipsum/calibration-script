@@ -43,7 +43,7 @@ NOTES:
 	If the operator enters any information incorrectly, the script must be restarted from the beginning.
 	This script and all associated materials reside in a Mercurial repository at http://bitbucket.org/ipsum/calibration-script/overview/
 	For information on regex (regular expressions) look up the re module on python.org in the 2.6 documentation and also look at en.wikipedia.org/wiki/Regular_expression
-	
+~~~~~~~~~~~~~~~~~~~~~~	
 	
 '''
 
