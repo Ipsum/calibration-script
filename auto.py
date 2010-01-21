@@ -165,7 +165,7 @@ while patt.search(pcbSN):
         pcbSN = raw_input('Invalid SN, please enter again ')
         
 dz        = raw_input('DZ? ')
-patt      = re.compile('[^0-9.].') #need to escape . ?
+patt      = re.compile('[^0-9.]*') #need to escape . ?
 while patt.search(dz):
         dz = raw_input('Invalid DZ, please enter again ')
         
