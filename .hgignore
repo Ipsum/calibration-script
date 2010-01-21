@@ -1,0 +1,21 @@
+#this file causes hg to ignore all files matching the pattern below
+
+# use glob syntax
+syntax: glob
+
+*.sdb
+*.cce
+*.cod
+*.cof
+*.dep
+*.hex
+*.lde
+*.lst
+*.map
+*.mcs
+*.mcp
+*.mcw
+*.mptags
+*.obj
+*.sym
+*.tagsrc
