@@ -48,10 +48,10 @@ NOTES:
 '''
 
 
-from __future__ import division
+from __future__ import division #better floating point math
 import serial
-import os
-import re
+import os #operating system interface
+import re #regular expressions
 import time
 import datetime
 
