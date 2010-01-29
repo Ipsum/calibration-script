@@ -1,0 +1,92 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'C:\code\calibration-script\DB stuff\lookup.ui'
+#
+# Created: Thu Jan 28 21:31:38 2010
+#      by: PyQt4 UI code generator 4.7
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(580, 300)
+        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
+        self.buttonBox.setGeometry(QtCore.QRect(410, 270, 161, 21))
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.tableWidget = QtGui.QTableWidget(Dialog)
+        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 581, 181))
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(13)
+        self.tableWidget.setRowCount(0)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(4, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(5, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(6, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(7, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(8, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(9, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(10, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(11, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(12, item)
+        self.SOnum = QtGui.QLineEdit(Dialog)
+        self.SOnum.setGeometry(QtCore.QRect(60, 190, 113, 20))
+        self.SOnum.setObjectName("SOnum")
+        self.castingSN = QtGui.QLineEdit(Dialog)
+        self.castingSN.setGeometry(QtCore.QRect(60, 220, 113, 20))
+        self.castingSN.setObjectName("castingSN")
+        self.label = QtGui.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(20, 190, 31, 16))
+        self.label.setObjectName("label")
+        self.label_2 = QtGui.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(20, 220, 31, 20))
+        self.label_2.setObjectName("label_2")
+        self.pushButton = QtGui.QPushButton(Dialog)
+        self.pushButton.setGeometry(QtCore.QRect(70, 250, 75, 23))
+        self.pushButton.setObjectName("pushButton")
+
+        self.retranslateUi(Dialog)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), Dialog.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), Dialog.reject)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), self.tableWidget.clear)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("Dialog", "Customer", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("Dialog", "Sales Order #", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(2).setText(QtGui.QApplication.translate("Dialog", "Casting SN", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(3).setText(QtGui.QApplication.translate("Dialog", "PCB SN", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(4).setText(QtGui.QApplication.translate("Dialog", "Date", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(5).setText(QtGui.QApplication.translate("Dialog", "Liters", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(6).setText(QtGui.QApplication.translate("Dialog", "Pulse", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(7).setText(QtGui.QApplication.translate("Dialog", "Direction", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(8).setText(QtGui.QApplication.translate("Dialog", "K", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(9).setText(QtGui.QApplication.translate("Dialog", "Dz", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(10).setText(QtGui.QApplication.translate("Dialog", "Polarity", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(11).setText(QtGui.QApplication.translate("Dialog", "Pre-trig", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.horizontalHeaderItem(12).setText(QtGui.QApplication.translate("Dialog", "FE", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("Dialog", "SO #:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("Dialog", "SN #:", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("Dialog", "Update", None, QtGui.QApplication.UnicodeUTF8))
+
