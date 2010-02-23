@@ -65,6 +65,7 @@ resp   = {'y': 1, 'Y': 1, 'n': 0, 'N': 0}
 
 #Values writted to serial port copied from the ALMEMO 2690 documentation
 def setup(FS):
+	"Sets up datalogger"
         s = serial.Serial(0) #Open serial port(using defaults: 9700 baud, port 0, ect) and create a serial port object called s
         s.write("E00")  #Write E00 to open serial port (selects channel M00)
         s.write("f1")
@@ -84,6 +85,7 @@ def setup(FS):
         return s.isOpen() #check to see if the serial connection is open and make this the return value of the function
 
 def getdata():
+	"Gets one run of data"
         
         REFavg   = 0
         MUTavg   = 0
