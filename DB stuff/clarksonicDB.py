@@ -20,19 +20,9 @@ import sqlite3
 
 from datetime import date
 
-def dbconnect(db):
-    "check to see that our db has the clarksonic table and return a connection."
-    conn = sqlite3.connect(db)
-
-    conn.execute("CREATE TABLE IF NOT EXISTS clarksonic(id integer primary key "
-                 "autoincrement, customer text, salesorder text, "
-                 "pcb integer, casting integer, date datetime, "
                  "k real, dz real, pol text, ptrig real, "
                  "dir integer, pulse integer, liters integer, fe integer);")
 
-    conn.commit()
-
-    return conn
 
 def custom(dbpath, command):
 	"execute a custom query on specified db"
