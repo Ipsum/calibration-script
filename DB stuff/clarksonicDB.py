@@ -27,8 +27,8 @@ def dbconnect(db):
     conn.execute("CREATE TABLE IF NOT EXISTS clarksonic(id integer primary key "
                  "autoincrement, customer text, salesorder text, "
                  "pcb integer, casting integer, date datetime, "
-				 "calibrator text, k real, dz real, pol text, "
-				 "dir integer, pulse integer, liters integer, fe integer);")
+                 "k real, dz real, pol text, ptrig real, "
+                 "dir integer, pulse integer, liters integer, fe integer);")
 
     conn.commit()
 
@@ -55,8 +55,8 @@ def custom(dbpath, command):
 	
 #get path to db	
 dbpath = raw_input('Path to database? ')
-command = raw_input('Enter SQLite3 query to run: ')
-
-finished = custom(dbpath, command)
+while 1:
+    command = raw_input('Enter SQLite3 query to run: ')
+    finished = custom(dbpath, command)
 
 print finished
