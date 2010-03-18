@@ -3,7 +3,7 @@ auto.py
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 Written with Python 2.6 and pySerial (http://pyserial.sourceforge.net/)
-	for Clark Solutions
+    for Clark Solutions
 
 By David Tyler
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,31 +20,31 @@ and renamed by the meter's SN_PCBSN.h (or .html)
 
 ~~~~~~~~~~~~~~~~~~~~~~
 Operator Steps:
-	Open the custom MPLAB project
-	Follow on-screen prompts to enter information
-	When prompted, compile and upload the MPLAB project
-	Release the meter from reset
-	Press Enter to resume operation of this script
-	Wait for script to finish getting data
-	When prompted, compile and upload the MPLAB project
-	Release the meter from reset
-	Press Enter to resume operation of this script
-	The script will now take 2 more sets of data and automatically open a report
-	Print the report that opens, then close it
-	Done
+    Open the custom MPLAB project
+    Follow on-screen prompts to enter information
+    When prompted, compile and upload the MPLAB project
+    Release the meter from reset
+    Press Enter to resume operation of this script
+    Wait for script to finish getting data
+    When prompted, compile and upload the MPLAB project
+    Release the meter from reset
+    Press Enter to resume operation of this script
+    The script will now take 2 more sets of data and automatically open a report
+    Print the report that opens, then close it
+    Done
 ~~~~~~~~~~~~~~~~~~~~~~
 
 
 ~~~~~~~~~~~~~~~~~~~~~~
 NOTES:
-	Currently, this script operated in the C:\cal folder. Create this if it does not exist.
-	You need to download and install Python 2.6 from python.org
-	You need to download and install pySerial from http://pyserial.sourceforge.net/
-	If the operator enters any information incorrectly, the script must be restarted from the beginning.
-	This script and all associated materials reside in a Mercurial repository at http://bitbucket.org/ipsum/calibration-script/overview/
-	For information on regex (regular expressions) look up the re module on python.org in the 2.6 documentation and also look at en.wikipedia.org/wiki/Regular_expression
-~~~~~~~~~~~~~~~~~~~~~~	
-	
+    Currently, this script operated in the C:\cal folder. Create this if it does not exist.
+    You need to download and install Python 2.6 from python.org
+    You need to download and install pySerial from http://pyserial.sourceforge.net/
+    If the operator enters any information incorrectly, the script must be restarted from the beginning.
+    This script and all associated materials reside in a Mercurial repository at http://bitbucket.org/ipsum/calibration-script/overview/
+    For information on regex (regular expressions) look up the re module on python.org in the 2.6 documentation and also look at en.wikipedia.org/wiki/Regular_expression
+~~~~~~~~~~~~~~~~~~~~~~    
+    
 '''
 
 
@@ -65,7 +65,7 @@ resp   = {'y': 1, 'Y': 1, 'n': 0, 'N': 0}
 
 #Values writted to serial port copied from the ALMEMO 2690 documentation
 def setup(FS):
-	"Sets up datalogger"
+    "Sets up datalogger"
         s = serial.Serial(0) #Open serial port(using defaults: 9700 baud, port 0, ect) and create a serial port object called s
         s.write("E00")  #Write E00 to open serial port (selects channel M00)
         s.write("f1")
@@ -76,8 +76,8 @@ def setup(FS):
         s.write("f1")
         s.write("k7") #locking mode 7
         s.write("N2") #spreadsheet mode
-		
-		#flushes are unnecessary but added for robustness. Clears any data that might be waiting to be sent or received from serial port.
+        
+        #flushes are unnecessary but added for robustness. Clears any data that might be waiting to be sent or received from serial port.
         s.flushInput() 
         s.flushOutput()
         s.close() #close the serial connection
@@ -85,7 +85,7 @@ def setup(FS):
         return s.isOpen() #check to see if the serial connection is open and make this the return value of the function
 
 def getdata():
-	"Gets one run of data"
+    "Gets one run of data"
         
         REFavg   = 0
         MUTavg   = 0
@@ -111,11 +111,11 @@ def getdata():
                 ser.write('S1')  #get one line of data
                 rLn = ser.readline() #discard first line of junk
                 rLn = ser.readline() #read line of data and store it as a string in rLn
-                print str(rLn)	#print rLn to console for debug output
+                print str(rLn)    #print rLn to console for debug output
                 s = p.findall(rLn) #Find every substring in rLn that matched the regex p and store it in the array s. It finds the MUT average and REF average in that order.
                 
-				#Since the datalogger is german, commas are used instead of periods to deliminate the ones and tenths places.
-				#So, we replace all of the commas by periods in each string in the array and convert both strings to floats
+                #Since the datalogger is german, commas are used instead of periods to deliminate the ones and tenths places.
+                #So, we replace all of the commas by periods in each string in the array and convert both strings to floats
                 MUT = float(s[0].replace(",","."))
                 REF = float(s[1].replace(",","."))
                 if MUT < 0 or REF < 0: #check to make sure greater than zero flow is being reported, otherwise throw an error and discard this data until operator fixes
@@ -287,8 +287,12 @@ f.close()
 #create report by writing some html
 d = datetime.date.today() #gets today's current date from the datetime module
 r = open(r'C:\cal\report.html','w') #create a report file
-r.write('<html><body><h1>{0} {1}</h1>\n<p>Casting: {2} PCB: {3}<BR><BR>DZ: {4} FE: {5}<BR><BR>K: {6}<BR><BR>Polarity {7}'.format(customer,wOrder,castingSN,pcbSN,dz,fe,K,pol))
-r.write('<BR><BR><h2>Run 1</h2><p2>MUT: {0} REF: {1}<BR><BR>Error: {2}</p2><BR><BR><h2>Run 2</h2><p2>MUT: {3} REF: {4}<BR><BR>Error: {5}'.format(avg1[0],avg1[1],(avg1[1]-avg1[0])*100/highFS,avg2[0],avg2[1],(avg2[1]-avg2[0])*100/highFS))
+r.write('<html><body><h1>{0} {1}</h1>\n<p>Casting: {2} PCB: {3}<BR><BR>DZ: {4}' 
+        'FE: {5}<BR><BR>K: {6}<BR><BR>Polarity {7}'.format(customer,wOrder,
+        castingSN,pcbSN,dz,fe,K,pol))
+r.write('<BR><BR><h2>Run 1</h2><p2>MUT: {0} REF: {1}<BR><BR>Error: {2}</p2><BR>'
+        '<BR><h2>Run 2</h2><p2>MUT: {3} REF: {4}<BR><BR>Error: {5}'.format(avg1[0],
+        avg1[1],(avg1[1]-avg1[0])*100/highFS,avg2[0],avg2[1],(avg2[1]-avg2[0])*100/highFS))
 r.write('<BR><BR><BR>' + d.strftime("%m/%d/%Y")) #strftime formats the datetime object d that has today's current date. Outputting in mm/dd/YYYY format in this case.
 r.close()
 
