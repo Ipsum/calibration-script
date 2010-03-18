@@ -7,7 +7,6 @@ Interface for looking up clarksonic records
 import os
 import sqlite3
 import webbrowser
-import ConfigParser
 
 dbpath = "ClarkSonic.db"
 
