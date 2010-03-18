@@ -5,6 +5,13 @@ Interface for precal station to database
 
 By David Tyler
 for Clark Solution
+
+
+references:
+http://www.commandprompt.com/community/pyqt/x1408
+http://www.riverbankcomputing.com/static/Docs/PyQt4/html/qlineedit.html#returnPressed
+http://wiki.python.org/moin/JonathanGardnerPyQtTutorial
+http://diotavelli.net/PyQtWiki/Creating_GUI_Applications_with_PyQt_and_Qt_Designer
 '''
 
 import os, re, sqlite3
@@ -16,6 +23,62 @@ from pcui import *
 
 dbpath = "ClarkSonic.db"
 
+class MainWindow(Ui_MainWindow):
+    def __init__(self, parent=None, name=None, fl=0):
+        Ui_MainWindow.__init__(self,parent,name,fl)
+        
+        self.connect(self.buttonBox, SIGNAL("accepted()"), self.save)
+        self.connect(self.dz, SIGNAL("editingFinished()"), self.slotSetDz)
+    def slotSetSO(self,value):
+        so = value
+        patt = re.compile('[^S0-9]*')
+        if(patt.search(so)):
+            self.OrderNumber.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.OrderNumber.setBackgroundColor(QColor(128, self.green, 128))
+
+    def slotSetCustomer(self,value):        
+        customer = value
+        patt = re.compile('[^A-Za-z ]*')
+        if(patt.search(customer)):
+            self.Customer.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.Customer.setBackgroundColor(QColor(128, self.green, 128))
+
+    def slotSetSN(self,value):   
+        castingSn = raw_input('Casting Serial Number: ')
+        patt = re.compile('[^0-9]*')
+        if(patt.search(castingSn)):
+            self.CastingSN.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.CastingSN.setBackgroundColor(QColor(128, self.green, 128))
+
+    def slotSetPCB(self,value):        
+        pcbSn = raw_input('PCB Serial Number: ')
+        patt = re.compile('[^0-9]*')
+        if(patt.search(pcbSn)):
+            self.pcbsn.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.pcbsn.setBackgroundColor(QColor(128, self.green, 128))
+
+    def slotSetSize(self,value):  
+        sizeInd = raw_input('Size Index: ')
+        patt = re.compile('[^0-7]*')
+        while(patt.search(sizeInd)):
+            sizeInd = raw_input('Invalid Size Index, valid entry 0-7: ')
+            
+    def slotSetFE(self,value):    
+        fe = raw_input('First Echo(mV): ')
+        patt = re.compile('[^0-9]*')
+        while(patt.search(fe)):
+            fe = raw_input('Invalid First Echo, retry: ')
+        
+    def slotSetDz(self,value):    
+        dz = raw_input('Dz: ')
+        patt = re.compile('[^0-9.]*')
+        while(patt.search(dz)):
+            dz = raw_input('Invalid Dz, retry: ')
+        
 def dbconnect(db):
     "check to see that our db has the clarksonic table and return a connection."
     conn = sqlite3.connect(db)
@@ -42,42 +105,52 @@ def save(db,so,customer,castingSn,pcbSn,sizeInd,fe,dz,):
     
     return "Sucess"
     
-print 'Precal Station Database entry'
-os.system('title Precal Database Entry') #set commandprompt title
+if __name__ == "__main__":
+    a = QApplication(sys.argv)
+    QObject.connect(a,SIGNAL("lastWindowClosed()",a,SLOT("quit()"))
+    w = MainWindow()
+    a.setMainWidget(w)
+    w.show()
+    a.exec_loop()
+    
 
-again = 'y'
-
-while(again == 'y'):
+def slotSetSO(self,value):
     so = raw_input('Sales Order Number: ')
     patt = re.compile('[^S0-9]*')
     while(patt.search(so)):
         so = raw_input('Invalid SO#, retry: ')
 
+def slotSetCustomer(self,value):        
     customer = raw_input('Customer name: ')
     patt = re.compile('[^A-Za-z ]*')
     while(patt.search(customer)):
         customer = raw_input('Invalid customer name, retry: ')
-        
+   
+def slotSetSN(self,value):   
     castingSn = raw_input('Casting Serial Number: ')
     patt = re.compile('[^0-9]*')
     while(patt.search(castingSn)):
         castingSn = raw_input('Invalid Casting SN, retry: ')
-        
+
+def slotSetPCB(self,value):        
     pcbSn = raw_input('PCB Serial Number: ')
     patt = re.compile('[^0-9]*')
     while(patt.search(pcbSn)):
         pcbSn = raw_input('Invalid PCB SN, retry: ')
-        
+  
+def slotSetSize(self,value):  
     sizeInd = raw_input('Size Index: ')
     patt = re.compile('[^0-7]*')
     while(patt.search(sizeInd)):
         sizeInd = raw_input('Invalid Size Index, valid entry 0-7: ')
         
+def slotSetFE(self,value):    
     fe = raw_input('First Echo(mV): ')
     patt = re.compile('[^0-9]*')
     while(patt.search(fe)):
         fe = raw_input('Invalid First Echo, retry: ')
-        
+    
+def slotSetDz(self,value):    
     dz = raw_input('Dz: ')
     patt = re.compile('[^0-9.]*')
     while(patt.search(dz)):

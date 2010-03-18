@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="dz">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -24,7 +24,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="firstecho">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -34,7 +34,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="SizeIndex">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -44,7 +44,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="Customer">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -54,7 +54,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_5">
+   <widget class="QLineEdit" name="OrderNumber">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -64,7 +64,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_6">
+   <widget class="QLineEdit" name="CastingSN">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -178,7 +178,7 @@
      <string>PCB SN</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_7">
+   <widget class="QLineEdit" name="pcbsn">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -188,7 +188,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="fault">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -200,11 +200,14 @@
     <property name="text">
      <string>Fault</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
     <attribute name="buttonGroup">
      <string>buttonGroup</string>
     </attribute>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="direction">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -216,11 +219,14 @@
     <property name="text">
      <string>Direction</string>
     </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
     <attribute name="buttonGroup">
      <string>buttonGroup</string>
     </attribute>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="pulse">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -236,7 +242,7 @@
      <string>buttonGroup</string>
     </attribute>
    </widget>
-   <widget class="QCheckBox" name="checkBox">
+   <widget class="QCheckBox" name="liters">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -287,7 +293,24 @@
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>242</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
  </buttongroups>
