@@ -29,7 +29,13 @@ class MainWindow(Ui_MainWindow):
         
         self.connect(self.buttonBox, SIGNAL("accepted()"), self.save)
         self.connect(self.dz, SIGNAL("editingFinished()"), self.slotSetDz)
-    def slotSetSO(self,value):
+		self.connect(self.firstecho, SIGNAL("editingFinished()"), self.slotSetFE)
+		self.connect(self.SizeIndex, SIGNAL("editingFinished()"), self.slotSetSize)
+		self.connect(self.Customer, SIGNAL("editingFinished()"), self.slotSetCustomer)
+		self.connect(self.OrderNumber, SIGNAL("editingFinished()"), self.slotSetSO)
+		self.connect(self.CastingSN, SIGNAL("editingFinished()"), self.slotSetSN)
+		
+	def slotSetSO(self,value):
         so = value
         patt = re.compile('[^S0-9]*')
         if(patt.search(so)):
@@ -64,21 +70,27 @@ class MainWindow(Ui_MainWindow):
     def slotSetSize(self,value):  
         sizeInd = raw_input('Size Index: ')
         patt = re.compile('[^0-7]*')
-        while(patt.search(sizeInd)):
-            sizeInd = raw_input('Invalid Size Index, valid entry 0-7: ')
-            
+        if(patt.search(sizeInd)):
+            self.SizeIndex.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.SizeIndex.setBackgroundColor(QColor(128, self.green, 128))
+  
     def slotSetFE(self,value):    
         fe = raw_input('First Echo(mV): ')
         patt = re.compile('[^0-9]*')
-        while(patt.search(fe)):
-            fe = raw_input('Invalid First Echo, retry: ')
-        
+        if(patt.search(fe)):
+            self.firstecho.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.firstecho.setBackgroundColor(QColor(128, self.green, 128))
+
     def slotSetDz(self,value):    
         dz = raw_input('Dz: ')
         patt = re.compile('[^0-9.]*')
-        while(patt.search(dz)):
-            dz = raw_input('Invalid Dz, retry: ')
-        
+        if(patt.search(dz)):
+            self.dz.setBackgroundColor(QColor(self.red, 128, 128))
+        else:
+            self.dz.setBackgroundColor(QColor(128, self.green, 128))
+
 def dbconnect(db):
     "check to see that our db has the clarksonic table and return a connection."
     conn = sqlite3.connect(db)
