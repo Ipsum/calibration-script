@@ -4,7 +4,7 @@ precal.py
 Interface for precal station to database
 
 By David Tyler
-for Clark Solution
+for Clark Solutions
 
 
 references:
@@ -40,57 +40,93 @@ class MainWindow(Ui_MainWindow):
         patt = re.compile('[^S0-9]*')
         if(patt.search(so)):
             self.OrderNumber.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "You must specify a Sales Order Number",
+                QMessageBox.Ok)
         else:
             self.OrderNumber.setBackgroundColor(QColor(128, self.green, 128))
-
+            self.so = value
+            
     def slotSetCustomer(self,value):        
         customer = value
         patt = re.compile('[^A-Za-z ]*')
         if(patt.search(customer)):
             self.Customer.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "You must specify a Sales Order Number",
+                QMessageBox.Ok)
         else:
             self.Customer.setBackgroundColor(QColor(128, self.green, 128))
-
+            self.cust = value
+            
     def slotSetSN(self,value):   
         castingSn = raw_input('Casting Serial Number: ')
         patt = re.compile('[^0-9]*')
         if(patt.search(castingSn)):
             self.CastingSN.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "You must specify a Sales Order Number",
+                QMessageBox.Ok)
         else:
             self.CastingSN.setBackgroundColor(QColor(128, self.green, 128))
-
+            self.csn = value
+            
     def slotSetPCB(self,value):        
         pcbSn = raw_input('PCB Serial Number: ')
         patt = re.compile('[^0-9]*')
         if(patt.search(pcbSn)):
             self.pcbsn.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "You must specify a Sales Order Number",
+                QMessageBox.Ok)
         else:
             self.pcbsn.setBackgroundColor(QColor(128, self.green, 128))
-
+            self.psn = value
+            
     def slotSetSize(self,value):  
         sizeInd = raw_input('Size Index: ')
-        patt = re.compile('[^0-7]*')
+        patt = re.compile('[^0-8]*')
         if(patt.search(sizeInd)):
             self.SizeIndex.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "Size Indexs: 3/4\"=0, 1\"=1, 1.5\"=2, 2\"=3, 3\"=4, 4\"=5, 6\"=6, 8\"=7 10\"=8",
+                QMessageBox.Ok)
         else:
             self.SizeIndex.setBackgroundColor(QColor(128, self.green, 128))
-  
+            self.si = value
+            
     def slotSetFE(self,value):    
         fe = raw_input('First Echo(mV): ')
         patt = re.compile('[^0-9]*')
         if(patt.search(fe)):
             self.firstecho.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "You must specify a valid First Echo",
+                QMessageBox.Ok)
         else:
             self.firstecho.setBackgroundColor(QColor(128, self.green, 128))
-
+            self.fe = value
+            
     def slotSetDz(self,value):    
         dz = raw_input('Dz: ')
         patt = re.compile('[^0-9.]*')
         if(patt.search(dz)):
             self.dz.setBackgroundColor(QColor(self.red, 128, 128))
+            QMessageBox.critical(self,
+                "Invalid Entry", "You must specify a valid Dz",
+                QMessageBox.Ok)
         else:
             self.dz.setBackgroundColor(QColor(128, self.green, 128))
-
+            self.dzval = value
+    
+    def save(self):
+        try:
+            dbsave(db,self.so,self.cust,self.csn,self.psn,self.si,self.fe,self.dzval) 
+        except sqlite3.Error:
+            QMessageBox.critical(self,
+                "Database Error", "There was an error saving your data",
+                QMessageBox.Ok)
+                
 def dbconnect(db):
     "check to see that our db has the clarksonic table and return a connection."
     conn = sqlite3.connect(db)
@@ -105,7 +141,7 @@ def dbconnect(db):
 
     return conn
     
-def save(db,so,customer,castingSn,pcbSn,sizeInd,fe,dz,):
+def dbsave(db,so,customer,castingSn,pcbSn,sizeInd,fe,dz,):
     conn = dbconnect(db)
     cursor = conn.cursor()
     
@@ -121,52 +157,13 @@ if __name__ == "__main__":
     a = QApplication(sys.argv)
     QObject.connect(a,SIGNAL("lastWindowClosed()",a,SLOT("quit()"))
     w = MainWindow()
+    QObject.connect(buttonBox, SIGNAL("accepted()"), SLOT("close()")
     a.setMainWidget(w)
     w.show()
     a.exec_loop()
     
 
-def slotSetSO(self,value):
-    so = raw_input('Sales Order Number: ')
-    patt = re.compile('[^S0-9]*')
-    while(patt.search(so)):
-        so = raw_input('Invalid SO#, retry: ')
 
-def slotSetCustomer(self,value):        
-    customer = raw_input('Customer name: ')
-    patt = re.compile('[^A-Za-z ]*')
-    while(patt.search(customer)):
-        customer = raw_input('Invalid customer name, retry: ')
-   
-def slotSetSN(self,value):   
-    castingSn = raw_input('Casting Serial Number: ')
-    patt = re.compile('[^0-9]*')
-    while(patt.search(castingSn)):
-        castingSn = raw_input('Invalid Casting SN, retry: ')
-
-def slotSetPCB(self,value):        
-    pcbSn = raw_input('PCB Serial Number: ')
-    patt = re.compile('[^0-9]*')
-    while(patt.search(pcbSn)):
-        pcbSn = raw_input('Invalid PCB SN, retry: ')
-  
-def slotSetSize(self,value):  
-    sizeInd = raw_input('Size Index: ')
-    patt = re.compile('[^0-7]*')
-    while(patt.search(sizeInd)):
-        sizeInd = raw_input('Invalid Size Index, valid entry 0-7: ')
-        
-def slotSetFE(self,value):    
-    fe = raw_input('First Echo(mV): ')
-    patt = re.compile('[^0-9]*')
-    while(patt.search(fe)):
-        fe = raw_input('Invalid First Echo, retry: ')
-    
-def slotSetDz(self,value):    
-    dz = raw_input('Dz: ')
-    patt = re.compile('[^0-9.]*')
-    while(patt.search(dz)):
-        dz = raw_input('Invalid Dz, retry: ')
         
     correct = raw_input('Entry Correct? [y/n]: ')
     if (correct == 'y'):
